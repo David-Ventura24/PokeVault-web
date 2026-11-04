@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es" data-scroll-behavior="smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PokéVault — Crea tu cuenta</title>
+<meta name="description" content="Crea tu cuenta en PokéVault: compra cartas graduadas con factura en USD o publica tu propia colección. Envíos a todo El Salvador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Nunito:wght@900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/acceso.css">
+</head>
+<body>
+
+<main id="showcase">
+  <div class="stage">
+    <div class="motes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="slab-stage">
+      <div class="slab-slot">
+        <img class="slab" src="img/charizard-slab.jpg"
+             alt="Charizard 1ª edición holográfica 1999, graduada CGC Pristine 10." draggable="false">
+        <div class="fx" aria-hidden="true">
+          <div class="foil"></div>
+          <div class="glare"></div>
+          <div class="sweep"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pitch">
+      <p class="say fade" style="--d:520ms">
+        Con una cuenta publicas tus piezas, sigues tus envíos y generas tu factura al instante.
+      </p>
+    </div>
+  </div>
+
+  <section class="pane pane-alta" aria-label="Crear cuenta">
+    <div class="card">
+      <a class="back-vitrina" href="index.html">← Volver a la vitrina</a>
+      <div class="wordmark fade" style="--d:0ms"><span>Poké<em>Vault</em><span class="dot"></span></span></div>
+      <p class="lead fade" style="--d:80ms">Crea tu cuenta. Tarda menos que abrir un sobre.</p>
+
+      <form id="registroForm" novalidate>
+        <fieldset class="fieldset fade" style="--d:140ms">
+          <legend>¿Cómo quieres usar la cuenta?</legend>
+          <div class="rol-opts">
+            <label class="rol-opt on" id="opt-comprador">
+              <input type="radio" name="rol" value="comprador" checked>
+              <b>Comprar</b>
+              <span>Guarda piezas en tu Pokédex, paga por transferencia y descarga tu factura.</span>
+            </label>
+            <label class="rol-opt" id="opt-vendedor">
+              <input type="radio" name="rol" value="vendedor">
+              <b>Vender</b>
+              <span>Publica tus cartas con foto, graduación y precio. Revisamos antes de publicar.</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field fade" style="--d:200ms" id="campo-nombre">
+          <label for="regNombre">Nombre completo</label>
+          <input id="regNombre" name="nombre" autocomplete="name" placeholder="Ana Martínez">
+        </div>
+
+        <div class="field fade" style="--d:240ms" id="campo-correo">
+          <label for="regCorreo">Correo</label>
+          <input id="regCorreo" type="email" name="email" autocomplete="email" placeholder="tu@correo.com">
+        </div>
+
+        <div class="field-doble fade" style="--d:280ms">
+          <div class="field" id="campo-telefono">
+            <label for="regTel">Teléfono (opcional)</label>
+            <input id="regTel" type="tel" name="telefono" autocomplete="tel" placeholder="7890 1234">
+          </div>
+          <div class="field">
+            <label for="regDepto">Departamento</label>
+            <select id="regDepto" name="departamento"></select>
+          </div>
+        </div>
+
+        <div class="field fade" style="--d:320ms" id="campo-direccion">
+          <label for="regDir">Dirección de entrega</label>
+          <input id="regDir" name="direccion" autocomplete="street-address" placeholder="Col. Escalón, calle X, n.º 12">
+        </div>
+
+        <div class="field-doble fade" style="--d:360ms">
+          <div class="field" id="campo-clave">
+            <label for="regPw">Contraseña</label>
+            <input id="regPw" type="password" name="password" autocomplete="new-password" placeholder="mínimo 6">
+          </div>
+          <div class="field" id="campo-confirmar">
+            <label for="regPw2">Repite la contraseña</label>
+            <input id="regPw2" type="password" name="confirmar" autocomplete="new-password" placeholder="••••••••">
+          </div>
+        </div>
+
+        <button class="btn btn-primary fade" id="registroBtn" type="submit" style="--d:420ms">Crear cuenta</button>
+      </form>
+
+      <p class="msg" id="mensaje" role="status" aria-live="polite"></p>
+
+      <p class="foot fade" style="--d:480ms">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+      <p class="trust fade" style="--d:520ms">Verificación en tres capas · Pago por transferencia · Factura en dólares</p>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="js/acceso.js"></script>
+<script type="module" src="js/registro.js"></script>
+</body>
+</html>

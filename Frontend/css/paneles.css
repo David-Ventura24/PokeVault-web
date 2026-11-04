@@ -1,0 +1,299 @@
+/* ============ paneles: registro, vender, admin ============ */
+/* Reutiliza los tokens de base.css y el lenguaje de profundidad (sombra sólida). */
+
+.panel {
+  background: var(--papel);
+  border: 2px solid var(--tinta);
+  border-radius: 24px;
+  box-shadow: 0 10px 0 rgba(11, 11, 15, .18);
+  padding: calc(26 * var(--u)) calc(28 * var(--u));
+}
+.panel + .panel { margin-top: calc(26 * var(--u)); }
+.panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: calc(12 * var(--u)); margin-bottom: calc(18 * var(--u)); }
+.panel-head h2 { font-size: max(calc(24 * var(--u)), 20px); letter-spacing: -.03em; }
+.panel-head p { font-size: max(calc(13.5 * var(--u)), 12px); color: var(--mid); max-width: calc(620 * var(--u)); }
+
+.campo { display: flex; flex-direction: column; gap: calc(6 * var(--u)); min-width: 0; }
+.campo label {
+  font-size: max(calc(11 * var(--u)), 10px); font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--mid);
+}
+.campo input, .campo select, .campo textarea {
+  width: 100%; min-width: 0;
+  padding: calc(12 * var(--u)) calc(14 * var(--u));
+  border-radius: 12px; border: 2px solid rgba(11, 11, 15, .14);
+  background: var(--niebla); color: var(--tinta);
+  font-size: max(calc(14.5 * var(--u)), 13px);
+  transition: border-color .18s var(--ease), background .18s var(--ease);
+}
+.campo textarea { resize: vertical; min-height: calc(96 * var(--u)); line-height: 1.55; }
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  outline: none; border-color: var(--tinta); background: var(--papel);
+}
+.campo .ayuda { font-size: max(calc(11.5 * var(--u)), 11px); color: var(--mid); }
+.campo.malo input, .campo.malo select, .campo.malo textarea { border-color: var(--rojo); background: #FFF6F4; }
+.campo .error { font-size: max(calc(11.5 * var(--u)), 11px); color: var(--rojo); font-weight: 600; }
+
+.malla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(16 * var(--u)) calc(18 * var(--u)); }
+.malla.tres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.malla .ancho { grid-column: 1 / -1; }
+
+/* ---- subida de foto ---- */
+.sube {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: calc(10 * var(--u));
+  min-height: calc(190 * var(--u));
+  border: 2px dashed rgba(11, 11, 15, .28); border-radius: 18px;
+  background: var(--niebla); text-align: center; padding: calc(16 * var(--u));
+  font-size: max(calc(13 * var(--u)), 12px); color: var(--mid);
+}
+.sube input[type="file"] { font-size: max(calc(12.5 * var(--u)), 12px); }
+.sube.on { border-style: solid; border-color: var(--tinta); background: var(--papel); }
+.previo { display: flex; align-items: center; gap: calc(14 * var(--u)); }
+.previo img {
+  width: calc(112 * var(--u)); height: calc(150 * var(--u)); object-fit: cover;
+  border-radius: 12px; border: 2px solid var(--tinta); background: var(--niebla);
+}
+
+/* ---- vista previa de la ficha ---- */
+.vista-previa { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: calc(20 * var(--u)); align-items: start; }
+.vista-previa .datos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(8 * var(--u)) calc(16 * var(--u)); font-size: max(calc(13.5 * var(--u)), 12px); }
+.vista-previa .datos dt { color: var(--mid); }
+.vista-previa .datos dd { font-weight: 700; }
+
+/* ---- tablas de administración ---- */
+.tabla { width: 100%; border-collapse: collapse; font-size: max(calc(13.5 * var(--u)), 12px); }
+.tabla th {
+  text-align: left; padding: calc(10 * var(--u)) calc(8 * var(--u));
+  border-bottom: 2px solid var(--tinta);
+  font-size: max(calc(10.5 * var(--u)), 10px); letter-spacing: .12em;
+  text-transform: uppercase; color: var(--mid); white-space: nowrap;
+}
+.tabla td { padding: calc(12 * var(--u)) calc(8 * var(--u)); border-bottom: 1px solid var(--niebla); vertical-align: middle; }
+.tabla .mini { width: calc(46 * var(--u)); height: calc(62 * var(--u)); object-fit: cover; border-radius: 8px; border: 1px solid rgba(11, 11, 15, .18); }
+.tabla .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tabla .acciones { display: flex; flex-wrap: wrap; gap: calc(8 * var(--u)); }
+.desborda { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+.pico {
+  display: inline-flex; align-items: center; gap: calc(6 * var(--u));
+  padding: calc(4 * var(--u)) calc(10 * var(--u)); border-radius: 99px;
+  border: 1.5px solid var(--tinta); background: var(--niebla);
+  font-size: max(calc(11 * var(--u)), 10px); font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+}
+.pico.tienda { background: var(--sol); }
+.pico.comunidad { background: rgba(217, 43, 5, .12); border-color: var(--rojo); color: var(--rojo); }
+.pico.revision { border-style: dashed; }
+.pico.rechazado { color: var(--mid); border-color: rgba(11, 11, 15, .28); }
+.pico.suspendido { color: var(--rojo); border-color: var(--rojo); }
+
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: calc(8 * var(--u));
+  min-height: max(calc(46 * var(--u)), 44px); padding: 0 calc(18 * var(--u));
+  border-radius: 14px; border: 2px solid var(--tinta);
+  font-weight: 700; font-size: max(calc(14 * var(--u)), 13px);
+  box-shadow: 0 4px 0 var(--tinta);
+  transition: transform .1s ease, box-shadow .1s ease, background .18s ease;
+}
+.boton:hover { background: var(--niebla); }
+.boton:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--tinta); }
+.boton.primario { background: var(--rojo); color: var(--papel); border-color: var(--tinta); }
+.boton.primario:hover { background: #EE3A10; }
+.boton.chico { min-height: max(calc(38 * var(--u)), 36px); padding: 0 calc(12 * var(--u)); font-size: max(calc(12.5 * var(--u)), 12px); box-shadow: 0 3px 0 var(--tinta); }
+.boton.fantasma { border-color: rgba(11, 11, 15, .16); box-shadow: none; color: var(--mid); }
+.boton:disabled { opacity: .45; cursor: not-allowed; }
+
+.fila-acciones { display: flex; flex-wrap: wrap; gap: calc(12 * var(--u)); margin-top: calc(20 * var(--u)); }
+.aviso {
+  padding: calc(12 * var(--u)) calc(16 * var(--u)); border-radius: 14px;
+  border: 1.5px solid var(--tinta); background: rgba(255, 214, 10, .18);
+  font-size: max(calc(13 * var(--u)), 12px); line-height: 1.6;
+}
+.aviso.malo { border-color: var(--rojo); background: #FFF6F4; color: var(--rojo); }
+.aviso.bueno { border-color: var(--tinta); background: rgba(11, 11, 15, .06); }
+
+.demo-nota {
+  margin-top: calc(18 * var(--u)); padding: calc(14 * var(--u)) calc(16 * var(--u));
+  border-radius: 16px; background: var(--niebla); border-left: 4px solid var(--sol);
+  font-size: max(calc(12.5 * var(--u)), 12px); line-height: 1.65; color: var(--mid);
+}
+.demo-nota b { color: var(--tinta); }
+
+/* ---- pantalla de la puerta de acceso ---- */
+.puerta {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(10 * var(--u));
+  padding: calc(60 * var(--u)) var(--pad);
+  text-align: center;
+}
+.puerta h1 { font-size: clamp(22px, calc(34 * var(--u)), 34px); color: var(--tinta); }
+.puerta p { font-size: max(calc(13.5 * var(--u)), 13px); color: var(--mid); }
+
+@media (max-width: 820px) {
+  .panel { padding: 18px; border-radius: 20px; }
+  .malla, .malla.tres, .vista-previa, .vista-previa .datos { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- rejilla de cartas de la comunidad (página /comunidad) ---- */
+/* Las columnas tienen tope: en monitores anchos la carta no crece sin límite. */
+.grid-comunidad {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(190 * var(--u)), calc(265 * var(--u))));
+  justify-content: center;
+  gap: calc(34 * var(--u)) calc(24 * var(--u));
+  align-items: start;
+  margin-top: calc(30 * var(--u));
+}
+.grid-comunidad .m { width: 100%; }
+@media (max-width: 820px) { .grid-comunidad { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 26px 14px; } }
+
+/* ---- extras del formulario de publicación ---- */
+.campo .marca {
+  display: flex; align-items: center; gap: calc(10 * var(--u));
+  font-size: max(calc(14 * var(--u)), 13px); font-weight: 700;
+  letter-spacing: 0; text-transform: none; color: var(--tinta);
+  cursor: pointer; min-height: max(calc(44 * var(--u)), 44px);
+}
+.campo .marca input[type="checkbox"] {
+  width: max(calc(20 * var(--u)), 18px); height: max(calc(20 * var(--u)), 18px);
+  accent-color: var(--rojo); flex: 0 0 auto;
+}
+
+.card-previa {
+  display: block; width: 100%; max-width: calc(220 * var(--u)); height: auto;
+  aspect-ratio: 0.7; object-fit: cover;
+  border-radius: 18px; border: 2px solid var(--tinta); background: var(--niebla);
+  box-shadow:
+    0 8px 0 var(--tinta),
+    0 0 calc(30px * var(--gl, 0)) calc(4px * var(--gl, 0)) rgba(var(--glc, 255,214,10), calc(.38 * var(--gl, 0))),
+    inset 0 0 calc(24px * var(--gl, 0)) rgba(var(--glc, 255,214,10), calc(.34 * var(--gl, 0)));
+}
+.card-previa.vacia {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: calc(16 * var(--u));
+  font-size: max(calc(12.5 * var(--u)), 12px); color: var(--mid);
+  border-style: dashed; box-shadow: none; aspect-ratio: 0.7;
+}
+p.aviso { margin-top: calc(18 * var(--u)); }
+.vista-previa .datos dd { overflow-wrap: anywhere; }
+
+/* ---- página de paneles (vender / admin / comunidad) ---- */
+.contenedor {
+  width: 100%;
+  padding: calc(30 * var(--u)) var(--pad) calc(56 * var(--u));
+  display: flex; flex-direction: column; gap: calc(22 * var(--u));
+}
+.contenedor .panel + .panel { margin-top: 0; }
+/* En React los paneles del panel de administración son hijos directos de
+   .contenedor; aquí cuelgan de dives ancla. display:contents devuelve los hijos
+   al flujo del padre (mismo gap) y un ancla vacía no aporta ni caja ni separación. */
+#ad-error, #ad-vista, #ad-alta-form, #ad-edit-form, #ad-catalogo { display: contents; }
+.contenedor h2 { line-height: 1.15; }
+.contenedor code { font-size: .92em; }
+
+.celda-pieza { display: flex; align-items: center; gap: calc(10 * var(--u)); min-width: calc(190 * var(--u)); }
+.celda-pieza span { display: flex; flex-direction: column; gap: 2px; }
+.celda-pieza b { font-weight: 800; }
+.celda-pieza em { font-style: normal; font-size: max(calc(11.5 * var(--u)), 11px); color: var(--mid); }
+
+.cabecera-vista { display: flex; flex-wrap: wrap; align-items: baseline; gap: calc(12 * var(--u)); justify-content: space-between; }
+.cabecera-vista h1 { font-size: max(calc(30 * var(--u)), 24px); letter-spacing: -.03em; line-height: 1.1; }
+.cabecera-vista p { font-size: max(calc(13.5 * var(--u)), 12px); color: var(--mid); max-width: calc(640 * var(--u)); }
+.muted { color: var(--mid); font-size: max(calc(13.5 * var(--u)), 13px); }
+
+/* ---- estados de pago y selectores en tabla ---- */
+.pico.estado-pendiente { border-style: dashed; color: var(--mid); }
+.pico.estado-verificacion { background: rgba(255, 214, 10, .34); }
+.pico.estado-pagado { background: var(--sol); }
+.pico.estado-anulada { color: var(--rojo); border-color: var(--rojo); text-decoration: line-through; }
+.selector-inline {
+  padding: calc(8 * var(--u)) calc(10 * var(--u));
+  border-radius: 10px; border: 2px solid rgba(11, 11, 15, .14);
+  background: var(--niebla); color: var(--tinta);
+  font-size: max(calc(13 * var(--u)), 12px); font-weight: 700;
+}
+.selector-inline:disabled { opacity: .5; }
+.tabla ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.tabla em.muted { font-style: normal; color: var(--mid); }
+
+/* ---- cartas de la comunidad en flujo normal (la vitrina las posiciona en absolute) ---- */
+/* Cada celda es su propio contenedor: la ficha se mide con cqi, no con vw, para que la
+   versión pequeña no herede la tipografía ni el peso visual de la carta gigante del anillo.
+   Aquí la carta es la protagonista: borde y sombra suaves, halo al 45 % y una sola línea
+   de texto por dato. */
+.grid-comunidad .m {
+  position: relative; left: auto; top: auto;
+  width: 100%; aspect-ratio: .7;
+  transform: none; cursor: pointer;
+  container-type: inline-size;
+}
+.grid-comunidad .m .m-card {
+  padding: 7%;
+  border-radius: 16px;
+  border-width: 2px;
+  border-color: rgba(11, 11, 15, .82);
+  box-shadow:
+    0 6px 0 rgba(11, 11, 15, .16),
+    0 0 calc(16px * var(--gl)) rgba(var(--glc), calc(.16 * var(--gl)));
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+.grid-comunidad .m .m-card::before { display: none; }
+.grid-comunidad .m .m-card::after {
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(var(--glc), calc(.3 * var(--gl)));
+}
+.grid-comunidad .m.oneof .m-card { animation: none; }
+.grid-comunidad .m:hover .m-card {
+  transform: translateY(-4px);
+  box-shadow:
+    0 9px 0 rgba(11, 11, 15, .18),
+    0 0 calc(22px * var(--gl)) rgba(var(--glc), calc(.22 * var(--gl)));
+}
+.grid-comunidad .m:active .m-card { transform: translateY(2px); }
+
+.grid-comunidad .card-header { margin-bottom: 0; gap: calc(8 * var(--u)); }
+.grid-comunidad .card-art { flex: 1; margin-top: 4%; border-radius: 10px; }
+.grid-comunidad .card-footer {
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: calc(8 * var(--u));
+}
+.grid-comunidad .card-tag {
+  font-size: max(9px, 4.2cqi);
+  padding: 2px 6px;
+  border-radius: 6px;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.grid-comunidad .card-no {
+  font-size: max(9px, 4cqi);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.grid-comunidad .card-name {
+  font-size: max(12px, 4.8cqi);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.grid-comunidad .card-price { font-size: max(11px, 4.6cqi); white-space: nowrap; }
+.grid-comunidad .gchip {
+  font-size: max(8.5px, 3.8cqi);
+  padding: 2px 6px;
+  border-radius: 6px;
+  box-shadow: none;
+}
+.grid-comunidad .card-1of1 {
+  font-size: max(8.5px, 3.8cqi);
+  padding: 2px 6px;
+  border-radius: 6px;
+  box-shadow: 0 2px 0 var(--tinta);
+}

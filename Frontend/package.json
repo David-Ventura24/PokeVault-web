@@ -1,0 +1,13 @@
+{
+  "name": "pokevault-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Frontend estático de PokéVault. El sitio funciona sin instalar nada; los únicos devDependencies son para recompilar la capa de datos desde src/lib.",
+  "scripts": {
+    "servidor": "node servidor-local.mjs",
+    "compilar": "tsc -p tsconfig.sitio.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,233 @@
+/* Balda tipo ruleta 3D de las cartas de la comunidad (CarruselComunidad.tsx).
+   La geometría la manda el JS con --cq-alto/--cq-ancho/--cq-R; aquí solo se
+   describe la caja y la cámara. */
+
+.cq {
+  --cq-alto: 234px;
+  --cq-ancho: 168px;
+  --cq-R: 963px;
+  position: relative;
+  padding: calc(6 * var(--u)) 0 0;
+}
+
+/* ---------------- el anaquel ---------------- */
+.cq-anaquel {
+  position: relative;
+  height: clamp(230px, 30vh, 310px);
+  overflow: hidden;
+  outline: none;
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 13%, #000 87%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 13%, #000 87%, transparent);
+}
+
+.cq-anaquel.arrastrando { cursor: grabbing; }
+
+.cq-anaquel:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--sol);
+  border-radius: 12px;
+}
+
+/* La camara cae sobre el eje del cilindro: perspectiva = radio y origen al
+   centro exacto del anaquel. preserve-3d comparte ese espacio entre las cintas. */
+.cq-lista {
+  position: absolute;
+  inset: 0;
+  perspective: var(--cq-R);
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+/* Cada cinta se centra por margen negativo: el transform del JS es puro 3D. */
+.cq-cinta {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--cq-ancho);
+  height: var(--cq-alto);
+  margin: calc(var(--cq-alto) / -2) 0 0 calc(var(--cq-ancho) / -2);
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* ---------------- la carta ---------------- */
+.cq-cv {
+  position: absolute;
+  inset: 0;
+  container-type: inline-size;
+  border-radius: 14px;
+  background: var(--papel);
+  box-shadow: 0 14px 26px -16px rgba(11, 11, 15, 0.5);
+}
+
+/* Reutiliza el modelo de carta de la vitrina, solo que a escala de balda. */
+.cq-cv .m {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  cursor: inherit;
+}
+
+.cq-cv .m-card {
+  padding: 6%;
+  border-radius: 14px;
+  border-width: 2px;
+  /* Solo la base negra: el halo amarillo de la vitrina, sumado entre tantas
+     cintas pegadas, pintaba una mancha amarilla en los bordes del anaquel. */
+  box-shadow:
+    0 3cqi 0 var(--tinta),
+    0 0 22px -8px rgba(11, 11, 15, .28);
+}
+
+.cq-cv .m-card::after { border-radius: 14px; }
+
+.cq-cv .card-header { margin-bottom: 0; gap: 6px; }
+.cq-cv .card-art { flex: 1; margin-top: 4%; border-radius: 8px; }
+.cq-cv .card-footer {
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 6px;
+}
+
+/* Tipografía por contenedor: la letra sigue al ancho de la carta, no al del navegador. */
+.cq-cv .card-tag { font-size: max(8.5px, 4.2cqi); padding: 2px 6px; border-radius: 6px; white-space: nowrap; }
+.cq-cv .card-no { font-size: max(8.5px, 3.9cqi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cq-cv .card-name { font-size: max(11px, 4.8cqi); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cq-cv .card-price { font-size: max(10.5px, 4.6cqi); white-space: nowrap; }
+.cq-cv .gchip { font-size: max(8px, 3.7cqi); padding: 2px 6px; border-radius: 6px; box-shadow: none; }
+.cq-cv .card-1of1 { font-size: max(8px, 3.7cqi); padding: 2px 6px; border-radius: 6px; }
+
+/* La carta de frente se levanta con sombra neutra: sin halo de color, para que
+   el anaquel no vuelva a mancharse de amarillo en los extremos. */
+.cq-cinta[data-frente='true'] .cq-cv {
+  box-shadow: 0 18px 30px -16px rgba(11, 11, 15, .5);
+}
+
+/* ---------------- el pie: flechas y rótulo ---------------- */
+.cq-pie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(16 * var(--u));
+  margin-top: calc(14 * var(--u));
+}
+
+.cq-flecha {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--tinta);
+  border: 1.5px solid var(--tinta);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.18s var(--ease), background 0.18s var(--ease), color 0.18s var(--ease);
+}
+
+.cq-flecha svg {
+  width: 18px;
+  height: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.cq-flecha:hover { background: var(--tinta); color: var(--papel); }
+.cq-flecha:active { transform: scale(0.93); }
+
+.cq-rotulos {
+  display: grid;
+  gap: 3px;
+  text-align: center;
+  min-width: min(92vw, 420px);
+}
+
+/* Cada línea sube saliendo de su propia máscara. */
+.cq-mascara {
+  display: block;
+  overflow: hidden;
+}
+
+.cq-mascara > span {
+  display: block;
+  will-change: transform;
+}
+
+.cq-titulo {
+  font-size: clamp(18px, calc(24 * var(--u)), 26px);
+  line-height: 1.1;
+  color: var(--tinta);
+}
+
+.cq-serie {
+  font-size: max(10px, calc(11 * var(--u)));
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.cq-linea {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.cq-precio {
+  font-size: max(13px, calc(16 * var(--u)));
+  font-weight: 900;
+  color: var(--rojo);
+}
+
+.cq-nota {
+  font-size: max(10px, calc(11 * var(--u)));
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tinta);
+  border: 1px solid var(--tinta);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+.cq-vendedor {
+  font-size: max(10px, calc(11 * var(--u)));
+  font-style: italic;
+  color: var(--mid);
+}
+
+.cq-acts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: calc(12 * var(--u));
+  margin-top: calc(18 * var(--u));
+}
+
+.cq-pista {
+  margin: calc(12 * var(--u)) auto 0;
+  max-width: 60ch;
+  text-align: center;
+  font-size: max(11px, calc(12 * var(--u)));
+  color: var(--mid);
+}
+
+/* ---------------- móvil ---------------- */
+@media (max-width: 820px) {
+  .cq-anaquel { height: clamp(200px, 42vw, 260px); }
+  .cq-pie { gap: 10px; }
+  .cq-flecha { width: 36px; height: 36px; }
+  .cq-rotulos { min-width: 0; }
+  .cq-pista { display: none; }
+}

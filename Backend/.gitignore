@@ -1,0 +1,29 @@
+# Dependencias y artefactos de build (el framework aún no está elegido)
+node_modules/
+vendor/
+dist/
+build/
+__pycache__/
+*.pyc
+
+# Entornos: solo se versiona .env.example
+.env
+.env.*
+!.env.example
+
+# Secretos y material subido por los usuarios
+*.pem
+*.key
+storage/uploads/
+
+# Base de datos local y respaldos
+*.sqlite
+*.db
+/backups/
+
+# Logs
+*.log
+logs/
+
+# Sistema
+.DS_Store

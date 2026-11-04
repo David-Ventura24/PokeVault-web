@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "outDir": "js",
+    "rootDir": "src/lib",
+    "strict": false,
+    "skipLibCheck": true,
+    "removeComments": false,
+    "noEmitOnError": false,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": [
+    "src/lib/types.ts",
+    "src/lib/config.ts",
+    "src/lib/moneda.ts",
+    "src/lib/halo.ts",
+    "src/lib/empresa.ts",
+    "src/lib/sesion.ts",
+    "src/lib/factura.ts",
+    "src/lib/factura-documento.ts",
+    "src/lib/comprador.ts",
+    "src/lib/semilla.ts",
+    "src/lib/mock.ts",
+    "src/lib/http.ts",
+    "src/lib/api.ts"
+  ]
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es" data-scroll-behavior="smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PokéVault — La bóveda del coleccionista</title>
+<meta name="description" content="Tienda en línea de cartas Pokémon originales y graduadas: cápsulas CGC y PSA con certificado verificable. Factura en USD y pago por transferencia, envíos a todo El Salvador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Nunito:wght@900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/acceso.css">
+</head>
+<body>
+
+<main id="showcase">
+  <div class="stage">
+    <div class="motes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="slab-stage">
+      <div class="slab-slot" id="ranura">
+        <img class="slab" src="img/charizard-slab.jpg"
+             alt="Charizard 1ª edición holográfica 1999, graduada CGC Pristine 10." draggable="false">
+        <div class="fx" aria-hidden="true">
+          <div class="foil"></div>
+          <div class="glare"></div>
+          <div class="sweep"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pitch">
+      <p class="say fade" style="--d:520ms">
+        Encuentra lo que buscas en nuestra tienda en línea, incluso tenemos al<span class="pc"> Charizard PCA 10</span>.<span class="wink"> (Se lo robamos a Jake Paul.)</span>
+      </p>
+    </div>
+  </div>
+
+  <section class="pane" aria-label="Acceso">
+    <div class="card">
+      <a class="back-vitrina" href="index.html" id="invitado">← Ver la vitrina como invitado</a>
+      <div class="wordmark fade" style="--d:0ms"><span>Poké<em>Vault</em><span class="dot"></span></span></div>
+      <p class="lead fade" style="--d:80ms">Accede para comprar, vender y seguir tus envíos.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field fade" style="--d:200ms" id="campo-correo">
+          <label for="emailInput">Correo</label>
+          <input id="emailInput" type="email" name="email" placeholder="tu@correo.com" autocomplete="email">
+        </div>
+        <div class="field fade" style="--d:260ms" id="campo-clave">
+          <label for="pwInput">Contraseña</label>
+          <input id="pwInput" type="password" name="password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div class="forgot-row fade" style="--d:300ms">
+          <a class="forgot" href="registro.html">¿No tienes cuenta? Regístrate</a>
+        </div>
+        <button class="btn btn-primary fade" id="loginBtn" type="submit" style="--d:360ms">Entrar</button>
+      </form>
+
+      <p class="msg" id="mensaje" role="status" aria-live="polite"></p>
+
+      <div class="divider fade" style="--d:440ms">o</div>
+      <button type="button" class="btn btn-ghost fade" id="demo" style="--d:480ms">
+        <svg width="19" height="19" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.5-6.5C35.5 3.1 30.2 1 24 1 14.6 1 6.5 6.6 2.6 14.6l7.5 5.8C12.3 13.6 17.7 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.9 24.6c0-1.6-.1-2.7-.4-3.9H24v7.8h12.9c-.3 1.6-1.2 3.6-2.9 5.1l7.3 5.7c4.4-4.1 6.6-10.2 6.6-14.7z"/>
+          <path fill="#FBBC05" d="M10.1 28.6c-.5-1.4-.8-2.9-.8-4.6s.3-3.2.8-4.6l-7.5-5.8C1.2 16.7.4 20.2.4 24s.8 7.3 2.2 10.4l7.5-5.8z"/>
+          <path fill="#34A853" d="M24 47c6.5 0 12-2.1 16-5.8l-7.3-5.7c-2 1.4-4.7 2.4-8.7 2.4-6.3 0-11.7-4.1-13.9-9.8l-7.5 5.8C6.5 41.4 14.6 47 24 47z"/>
+        </svg>
+        Continuar con Google
+      </button>
+
+      <p class="foot fade" id="bottom" style="--d:540ms">
+        ¿Aún no tienes cuenta? <a href="registro.html">Publica tu colección</a>
+      </p>
+      <p class="trust fade" id="trust" style="--d:580ms">
+        Envío asegurado · Grading PSA y BGS · Compra protegida
+      </p>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="js/acceso.js"></script>
+<script type="module" src="js/login.js"></script>
+</body>
+</html>
